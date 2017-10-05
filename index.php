@@ -1,5 +1,5 @@
 <?php
-  require_once "config/sierra.inc";
+  require_once "config/sierra.inc.php";
   $settings = array();
   $settings['controllers'] = "controllers/";
   $settings['views'] = "views/";
