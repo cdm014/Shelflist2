@@ -1,6 +1,6 @@
 <?php
   class View {
-    protected $raw;
+    public $raw;
     public $viewName;
     protected $viewData;
     protected $settings;
@@ -9,6 +9,12 @@
       $this->viewName = $name;
       $this->fileString = $this->settings['views'].$this->viewName.".tpl";
       $this->viewData = array();
+      if (file_exists($this->fileString)) {
+        $this->raw = file_get_contents($this->fileString);
+        $this->temp = $this->raw;
+      } else {
+        throw new Exception("View ".$this->fileString." not found!" );
+      }
 
     }
 
@@ -17,9 +23,10 @@
       $html .= "<P>View name: ".$this->viewName."</p>";
       $html .= "<p>File Name: ".$this->fileString."</p>";
       $html .= "<P>Does Template exist: ".(file_exists($this->fileString)?"yes":"no")."</p>";
+      $html .= "<p>Raw template</p>\r\n<pre>".htmlentities($this->raw)."</pre>\r\n";
       $html .= "<p>View Data</p><pre>".print_r($this->viewData,true)."</pre>";
       $html .= "\r\n<p>Settings</p><pre>".print_r($this->settings,true)."</pre>";
-      print $html;
+      return $html;
     }
     
     function setkey($key,$data) {
@@ -37,13 +44,12 @@
     }
 
     function Parse() {
-      $initString = $this->raw;
-      $newstring = $this->raw;
+      $new = $this->raw;
       do {
-        $initString = $newstring;
-        $newString = $this->SinglePass($initString);
-      } while ($initString != $newString);
-      return $newString;
+        $init = $new;
+        $new = $this->SinglePass($init);
+      } while ($new != $init);
+      return $new;
     }
 
 }
