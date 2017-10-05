@@ -6,6 +6,7 @@
 
   require_once $settings['views']."index.php";
 
-  $testview = new View("page");
+  $testview = new View("page",$settings);
   $testview->OutputInfo();
+  //print $html1;
 ?>
