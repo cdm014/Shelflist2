@@ -18,6 +18,7 @@
       $html .= "<p>File Name: ".$this->fileString."</p>";
       $html .= "<P>Does Template exist: ".(file_exists($this->fileString)?"yes":"no")."</p>";
       $html .= "<p>View Data</p><pre>".print_r($this->viewData,true)."</pre>";
+      $html .= "\r\n<p>Settings</p><pre>".print_r($this->settings,true)."</pre>";
       print $html;
     }
     
