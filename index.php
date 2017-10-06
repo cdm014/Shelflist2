@@ -12,6 +12,7 @@
   try {
     $branches = loadModel("branches");
     $locations = loadModel("locations");
+    $items = loadModel("items");
    $testview->setKey('tpl-body',print_r($locations->locations,true));
   } 
   catch (Exception $e) {
