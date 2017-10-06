@@ -20,3 +20,16 @@
      return false;
    }		
  }
+
+  function loadModel($modelName) {
+    global $settings;
+    $fileString = $settings['models'].$modelName.".Model.php";
+    $classname = $modelName."Model";
+    if(file_exists($fileString)) {
+      include_once $fileString;
+      return new $classname();
+    } else {
+      throw new Exception("$fileString not found!");
+    }
+  }
+
