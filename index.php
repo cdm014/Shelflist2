@@ -11,7 +11,8 @@
   $testview = new View("page",$settings);
   try {
     $branches = loadModel("branches");
-   $testview->setKey('tpl-body',print_r($branches->branches,true));
+    $locations = loadModel("locations");
+   $testview->setKey('tpl-body',print_r($locations->locations,true));
   } 
   catch (Exception $e) {
     die($e->getMessage());
